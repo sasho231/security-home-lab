@@ -1,0 +1,16 @@
+# secrets — NEVER commit these
+*.env
+.env*
+secrets/
+*secret*
+*password*
+*credentials*
+kubeconfig
+*.pem
+*.key
+*.pfx
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+wazuh-docker/
+*.tfvars
