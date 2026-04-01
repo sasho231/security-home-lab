@@ -1,16 +1,20 @@
-# secrets — NEVER commit these
+# Secrets — never commit these
 *.env
 .env*
 secrets/
-*secret*
 *password*
 *credentials*
-kubeconfig
 *.pem
 *.key
 *.pfx
+kubeconfig
+# Terraform state contains resource IDs
 terraform.tfstate
 terraform.tfstate.backup
 .terraform/
-wazuh-docker/
 *.tfvars
+# Wazuh docker generates certs locally
+wazuh-docker/
+# OS junk
+.DS_Store
+Thumbs.db
