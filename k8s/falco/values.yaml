@@ -1,0 +1,13 @@
+driver:
+  kind: modern_ebpf    # works on WSL2, no kernel module needed
+
+falcosidekick:
+  enabled: true        # enables the alert router
+  webui:
+    enabled: true      # enables the web dashboard
+
+falco:
+  grpc:
+    enabled: true
+  grpcOutput:
+    enabled: true
