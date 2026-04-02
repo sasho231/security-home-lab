@@ -1,0 +1,6 @@
+apiVersion: v1          # which K8s API version to use
+kind: Namespace         # what type of object this is
+metadata:
+  name: lab-apps        # the name of your namespace
+  labels:
+    purpose: security-lab

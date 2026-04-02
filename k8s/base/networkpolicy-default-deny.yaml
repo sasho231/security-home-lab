@@ -1,0 +1,10 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all    # name of this policy
+  namespace: lab-apps       # applies to this namespace only
+spec:
+  podSelector: {}           # {} means select ALL pods
+  policyTypes:
+    - Ingress               # block incoming traffic
+    - Egress                # block outgoing traffic

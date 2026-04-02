@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-test          # name of this deployment
+  namespace: lab-apps       # which namespace to put it in
+spec:
+  replicas: 1               # how many copies to run
+  selector:
+    matchLabels:
+      app: nginx-test       # links Deployment to its pods
+  template:
+    metadata:
+      labels:
+        app: nginx-test
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        securityContext:
+          runAsNonRoot: false   # nginx needs root — note this for Falco
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
