@@ -1,0 +1,15 @@
+- rule: Suspicious download tool in container
+  desc: >
+    Detects curl or wget running inside a container.
+    Legitimate apps should not download files at runtime.
+  condition: >
+    spawned_process
+    and container
+    and proc.name in (curl, wget)
+  output: >
+    Download tool run in container
+    (user=%user.name cmd=%proc.cmdline
+    container=%container.name
+    image=%container.image.repository)
+  priority: WARNING
+  tags: [T1105, network, container]
