@@ -1,0 +1,38 @@
+stages:
+  - scan
+
+secret-detection:
+  stage: scan
+  image:
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  script:
+    - gitleaks detect --source . --verbose --report-format json --report-path gitleaks-report.json || true
+  artifacts:
+    when: always
+    paths: [gitleaks-report.json]
+    expire_in: 1 week
+
+sast-semgrep:
+  stage: scan
+  image:
+    name: returntocorp/semgrep:latest
+    entrypoint: [""]
+  script:
+    - semgrep --config=auto --json --output semgrep-report.json . || true
+    - semgrep --config=auto . || true
+  artifacts:
+    when: always
+    paths: [semgrep-report.json]
+    expire_in: 1 week
+
+iac-scan:
+  stage: scan
+  image:
+    name: bridgecrew/checkov:latest
+    entrypoint: [""]
+  script:
+    - checkov -d . --framework kubernetes --output cli || true
+  artifacts:
+    when: always
+    expire_in: 1 week
